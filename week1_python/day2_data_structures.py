@@ -55,3 +55,44 @@ print(f"posts[:3]: {posts[:3]}") # From start to index 2
 print(f"posts[2:]: {posts[2:]}") # From index 2 to end
 print(f"posts[::2]: {posts[::2]}") # Every 2nd item (step=2)
 print(f"posts[::-1]: {posts[::-1]}") # Reverse the list!
+
+# WordPress menu items experiment
+menu_items = ["Home", "About", "Services", "Portfolio", "Blog", "Contact"]
+
+print(f"Original menu: {menu_items}")
+print("Original menu:", menu_items)
+print("First 3 items:", menu_items[:3])
+print("Last 2 items:", menu_items[-2:])
+print("Every other itme:", menu_items[::2])
+print("Reversed menu:", menu_items[::-1])
+
+# Add a new menu item
+menu_items.append("Testimonials")
+print("After adding Testimonials:", menu_items)
+
+# Insert "Products" between "Services" and "Portfolio"
+menu_items.insert(3, "Products") # Position 3
+print("After inserting Products:", menu_items)
+
+# Practical WordPress scenario
+print("\n--- Real WrodPress Example ---")
+
+blog_posts = []
+
+# Add posts as they are published
+blog_posts.append("Getting Started with WordPress")
+blog_posts.append("10 Essential Plugins")
+blog_posts.append("SEO Optimization Guide")
+blog_posts.append("Speed Optimization Tips")
+blog_posts.append("Security Best Practices")
+
+print(f"Total published posts: {len(blog_posts)}")
+
+# Get recent posts for Home page (last 3)
+homepage_posts = blog_posts[-3:]
+print(f"Recent Blog Posts {homepage_posts}")
+
+# Get older posts for Archive page (everything except last 3)
+archive_posts = blog_posts[:-3]
+print(f"Archive posts: {archive_posts}")
+
