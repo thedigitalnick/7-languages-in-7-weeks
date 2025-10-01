@@ -153,49 +153,15 @@
 
 # # Check if key exists
 
-print("\n--- WordPress User Management ---")
+# 
 
-# WordPress users with roles and metadata
-wp_users = {
-    "nicholas": {
-        "role": "administrator",
-        "email": "nicholas@example.com",
-        "posts_count": 25,
-        "last_login": "2024-09-26",
-        "capabilities": ["edit_posts", "manage_options", "edit_users"]
-    },
-    "editor1": {
-        "role": "editor", 
-        "email": "editor@example.com",
-        "posts_count": 12,
-        "last_login": "2024-09-25",
-        "capabilities": ["edit_posts", "edit_others_posts"]
-    },
-    "author1": {
-        "role": "author",
-        "email": "author@example.com", 
-        "posts_count": 8,
-        "last_login": "2024-09-20",
-        "capabilities": ["edit_posts"]
-    }
-}
+#Sets -  perfect for handling unique collections like tags and categories.
 
-# Working with user data
-print("WordPress Users:")
-for username, user_data in wp_users.items():
-    print(f"  {username}: {user_data['role']} ({user_data['posts_count']} posts)")
+print("\n" + "="*50)
+print("SETS - Unique Collections")
+print("="*50)
 
-# Find administrators
-admins = []
-for username, user_data in wp_users.items():
-    if user_data["role"] == "administrator":
-        admins.append(username)
-
-print(f"\nAdministrators: {admins}")
-
-# Count posts by all users
-total_posts = 0
-for user_data in wp_users.values():
-    total_posts += user_data["posts_count"]
-
-print(f"Total posts across all users: {total_posts}")
+# WordPress categories (automatically removes duplicates)
+post_categories = {"SEO", "WordPress", "Development", "SEO", "Marketing", "WordPress"}
+print(f"Categories (duplicates removed): {post_categories}")
+print(f"Unique Categories: {len(post_categories)}")
