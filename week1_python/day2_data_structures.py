@@ -165,3 +165,28 @@ print("="*50)
 post_categories = {"SEO", "WordPress", "Development", "SEO", "Marketing", "WordPress"}
 print(f"Categories (duplicates removed): {post_categories}")
 print(f"Unique Categories: {len(post_categories)}")
+
+# WordPress tags from different posts
+post1_tags = {"wordpress", "seo", "optimization"}
+post2_tags = {"seo", "marketing", "coding"}
+post3_tags = {"development", "wordpress", "coding"}
+
+print(f"\nPost 1 tags: {post1_tags}")
+print(f"Post 2 tags: {post2_tags}")
+print(f"Post 3 tags: {post3_tags}")
+
+# Find tags that appear in multiple posts
+common_tags = post1_tags & post2_tags # Intersection (AND)
+print(f"\nTags in both Post1 and Post 2: {common_tags}")
+
+# Combine all tags from all posts
+all_tags = post1_tags | post2_tags | post3_tags # Union (OR)
+print(f"All unique tags: {all_tags}")
+
+# Tags unique to post1
+unique_to_post1 = post1_tags - post2_tags - post3_tags # Difference
+print(f"Tags only in Post 1: {unique_to_post1}")
+
+# Check if tag exists (very fast lookup)
+if "seo" in post1_tags:
+    print("\nPost1 is SEO-focused")
