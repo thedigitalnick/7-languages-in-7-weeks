@@ -157,36 +157,123 @@
 
 #Sets -  perfect for handling unique collections like tags and categories.
 
+# print("\n" + "="*50)
+# print("SETS - Unique Collections")
+# print("="*50)
+
+# # WordPress categories (automatically removes duplicates)
+# post_categories = {"SEO", "WordPress", "Development", "SEO", "Marketing", "WordPress"}
+# print(f"Categories (duplicates removed): {post_categories}")
+# print(f"Unique Categories: {len(post_categories)}")
+
+# # WordPress tags from different posts
+# post1_tags = {"wordpress", "seo", "optimization"}
+# post2_tags = {"seo", "marketing", "coding"}
+# post3_tags = {"development", "wordpress", "coding"}
+
+# print(f"\nPost 1 tags: {post1_tags}")
+# print(f"Post 2 tags: {post2_tags}")
+# print(f"Post 3 tags: {post3_tags}")
+
+# # Find tags that appear in multiple posts
+# common_tags = post1_tags & post2_tags # Intersection (AND)
+# print(f"\nTags in both Post1 and Post 2: {common_tags}")
+
+# # Combine all tags from all posts
+# all_tags = post1_tags | post2_tags | post3_tags # Union (OR)
+# print(f"All unique tags: {all_tags}")
+
+# # Tags unique to post1
+# unique_to_post1 = post1_tags - post2_tags - post3_tags # Difference
+# print(f"Tags only in Post 1: {unique_to_post1}")
+
+# # Check if tag exists (very fast lookup)
+# if "seo" in post1_tags:
+#     print("\nPost1 is SEO-focused")
+
+# Manage site-wide tag taxonomy
+# print("\n--- WordPress Tag Management ---")
+
+# # Popular tags site-wide
+# popular_site_tags = {"seo", "wordpress", "marketing", "design", "development"}
+
+# # New post tags
+# new_post_tags = {"wordpress", "seo", "optimization", "performance"}
+
+# # Find which new tags need to be added to site taxonomy
+# tags_to_add = new_post_tags - popular_site_tags
+# print(f"New tags to add to the taxonomy: {tags_to_add}")
+
+# # Update popular tags
+# popular_site_tags.update(tags_to_add) # add new tags
+# print(f"Updated site taxonomy: {popular_site_tags}")
+
+# # Remove unused tag
+#  # remove specific tag
+# popular_site_tags.remove("design")
+# print(f"After removing design: {popular_site_tags}")
+
 print("\n" + "="*50)
-print("SETS - Unique Collections")
+print("FILE OPERATIONS")
 print("="*50)
 
-# WordPress categories (automatically removes duplicates)
-post_categories = {"SEO", "WordPress", "Development", "SEO", "Marketing", "WordPress"}
-print(f"Categories (duplicates removed): {post_categories}")
-print(f"Unique Categories: {len(post_categories)}")
+# Create a simple WordPress post export
+def create_post_data_file():
+    post_data = """title: Getting Started with WordPress
+        author: Nicholas
+        date: 2024-09-26
+        tags: wordpress, beginner, tutorial
+        ---
+        title: SEO Best Practices
+        author: Nicholas
+        date: 2024-09-25
+        tags: seo, optimization, marketing
+        ---
+        title: Javascript Performance
+        author: Editor1
+        date: 2024-09-24
+        tags: javascript, performance, development
+        """
 
-# WordPress tags from different posts
-post1_tags = {"wordpress", "seo", "optimization"}
-post2_tags = {"seo", "marketing", "coding"}
-post3_tags = {"development", "wordpress", "coding"}
+    with open('posts_export.txt', 'w') as file:
+        file.write(post_data)
 
-print(f"\nPost 1 tags: {post1_tags}")
-print(f"Post 2 tags: {post2_tags}")
-print(f"Post 3 tags: {post3_tags}")
+    print("Created posts_export.txt")
 
-# Find tags that appear in multiple posts
-common_tags = post1_tags & post2_tags # Intersection (AND)
-print(f"\nTags in both Post1 and Post 2: {common_tags}")
+# Read and parse the file
+def read_post_data():
+    try:
+        with open('posts_export.txt', 'r') as file:
+            content = file.read()
+    
+        posts = content.split('---')
+        parsed_posts = []
 
-# Combine all tags from all posts
-all_tags = post1_tags | post2_tags | post3_tags # Union (OR)
-print(f"All unique tags: {all_tags}")
+        for post in posts:
+            if post.strip():
+                lines = post.strip().split('\n')
+                post_dict = {}
 
-# Tags unique to post1
-unique_to_post1 = post1_tags - post2_tags - post3_tags # Difference
-print(f"Tags only in Post 1: {unique_to_post1}")
+                for line in lines:
+                    if ':' in line:
+                        key, value = line.split(':', 1)
+                        post_dict[key.strip()] = value.strip()
 
-# Check if tag exists (very fast lookup)
-if "seo" in post1_tags:
-    print("\nPost1 is SEO-focused")
+                parsed_posts.append(post_dict)
+
+        return parsed_posts
+
+    except FileNotFoundError:
+        print("Error: posts_export.txt not found")
+        return []
+    
+#Test it
+create_post_data_file()
+posts = read_post_data()
+
+print(f"\nFound {len(posts)} posts:")
+for post in posts:
+    print(f"  - {post.get('title', 'Untitled')} by {post.get('author', "Unknown")}")
+    print(f"   Tags: {post.get('tags', 'none')}")
+
+    
